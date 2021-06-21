@@ -14,26 +14,24 @@ import java.util.Scanner;
 public class Tmanagement {
 
 	public static void main(String[] args) throws IOException {
-		
+
 		Scanner sc = new Scanner(System.in);
-		
+
 		List<Userinfo> uList = new ArrayList<Userinfo>();
-		
+
 		Reader tdb = new FileReader("/Users/jangjaeyeong/javaStudy/imgfile/PhoneDB.txt");
 		BufferedReader br = new BufferedReader(tdb);
-		
+
 		String Tinfo;
-		
-		
-		
+
 		System.out.println("***************************************");
 		System.out.println("*          전화번호 관리 프로그램           *");
 		System.out.println("***************************************");
-		
+
 		boolean flag = true;
-		
-		while(flag) {
-			
+
+		while (flag) {
+
 			while (!((Tinfo = br.readLine()) == null)) {
 
 				String[] TinfoArray = Tinfo.split(",");
@@ -43,49 +41,55 @@ public class Tmanagement {
 				uList.add(Userinfo);
 
 			}
-			
+
 			System.out.println();
 			System.out.println("1.리스트 2.등록 3.삭제 4.검색 5.종료");
 			System.out.println("----------------------------------");
 			System.out.print(">메뉴번호: ");
 			int sellist = sc.nextInt();
-			
-			switch(sellist) {
-			case 1:{
+
+			switch (sellist) {
+			case 1: {
 				System.out.println("<1.리스트>");
-				for(int i = 0; i < uList.size();i++) {
-					System.out.print(i+1 + ".  ");
+				for (int i = 0; i < uList.size(); i++) {
+					System.out.print(i + 1 + ".  ");
 					uList.get(i).showList();
 				}
 				break;
 			}
-			case 2:{
-				
+			case 2: {
+
 				System.out.println("<2.등록>");
-				
+
 				System.out.print("이름: ");
-				String Rname = sc.nextLine();
-				
+				String Rname = sc.next();
+
 				System.out.print("휴대전화: ");
-				String Rhp = sc.nextLine();
-				
+				String Rhp = sc.next();
+
 				System.out.print("회사전화: ");
-				String Rcp = sc.nextLine();
-				
-				Userinfo adduserinfo = new Userinfo(Rname,Rhp,Rcp);
+				String Rcp = sc.next();
+
+				Userinfo adduserinfo = new Userinfo(Rname, Rhp, Rcp);
 				uList.add(adduserinfo);
-				
-				Writer wdb = new FileWriter("/Users/jangjaeyeong/javaStudy/imgfile/PhoneDB.txt",true);
+
+				Writer wdb = new FileWriter("/Users/jangjaeyeong/javaStudy/imgfile/PhoneDB.txt");
 				BufferedWriter bw = new BufferedWriter(wdb);
+
 				bw.write(Rname + "," + Rhp + "," + Rcp);
 				bw.newLine();
-				
-				
-				
 				bw.close();
+
 				break;
 			}
-			case 5:{
+			case 3: {
+				System.out.print(">번호 : ");
+				int delnum = sc.nextInt();
+				uList.remove(delnum - 1);
+				System.out.println("[삭제되었습니다.]");
+				break;
+			}
+			case 5: {
 				System.out.println();
 				System.out.println("***************************************");
 				System.out.println("*             감사합니다.                *");
@@ -93,17 +97,14 @@ public class Tmanagement {
 				flag = false;
 				break;
 			}
-			default:{
+			default: {
 				System.out.println("[다시 입력해 주세요.]");
 				break;
 			}
-			
-			}
-			
-		}
-		
-		
 
+			}
+
+		}
 		sc.close();
 		br.close();
 	}
