@@ -75,17 +75,26 @@ public class Tmanagement {
 
 				Writer wdb = new FileWriter("/Users/jangjaeyeong/javaStudy/imgfile/PhoneDB.txt");
 				BufferedWriter bw = new BufferedWriter(wdb);
-
-				bw.write(Rname + "," + Rhp + "," + Rcp);
-				bw.newLine();
+				for (int i = 0; i < uList.size(); i++) {
+					bw.write(uList.get(i).getName() + "," + uList.get(i).getHp() + "," + uList.get(i).getCompany());
+					bw.newLine();
+				}
 				bw.close();
-
 				break;
 			}
 			case 3: {
 				System.out.print(">번호 : ");
 				int delnum = sc.nextInt();
 				uList.remove(delnum - 1);
+				
+				Writer wdb = new FileWriter("/Users/jangjaeyeong/javaStudy/imgfile/PhoneDB.txt");
+				BufferedWriter bw = new BufferedWriter(wdb);
+				for (int i = 0; i < uList.size(); i++) {
+					bw.write(uList.get(i).getName() + "," + uList.get(i).getHp() + "," + uList.get(i).getCompany());
+					bw.newLine();
+				}
+				bw.close();
+				
 				System.out.println("[삭제되었습니다.]");
 				break;
 			}
