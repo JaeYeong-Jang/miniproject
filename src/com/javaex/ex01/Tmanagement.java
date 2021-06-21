@@ -86,7 +86,7 @@ public class Tmanagement {
 				System.out.print(">번호 : ");
 				int delnum = sc.nextInt();
 				uList.remove(delnum - 1);
-				
+
 				Writer wdb = new FileWriter("/Users/jangjaeyeong/javaStudy/imgfile/PhoneDB.txt");
 				BufferedWriter bw = new BufferedWriter(wdb);
 				for (int i = 0; i < uList.size(); i++) {
@@ -94,8 +94,22 @@ public class Tmanagement {
 					bw.newLine();
 				}
 				bw.close();
-				
+
 				System.out.println("[삭제되었습니다.]");
+				break;
+			}
+			case 4: {
+				System.out.println("<4.검색>");
+
+				System.out.print(">이름 : ");
+				String i_String = sc.next();
+				for (int i = 0; i < uList.size(); i++) {
+					if (uList.get(i).getName().contains(i_String)) {
+						System.out.print(i + 1 + ".  ");
+						uList.get(i).showList();
+					}
+				}
+
 				break;
 			}
 			case 5: {
